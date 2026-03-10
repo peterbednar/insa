@@ -24,7 +24,7 @@ random_forest = RandomForestClassifier(
 )
 
 scores = cross_val_score(random_forest, X, y, cv=5)
-print(f"Random forest cross-validation accuracy: {np.mean(scores):.4f}")
+print(f"Random forest cross-validation accuracy: {scores.mean():.4f}+/-{scores.std():.4f}")
 
 # ...
 
