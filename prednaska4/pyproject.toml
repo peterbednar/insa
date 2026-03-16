@@ -1,0 +1,38 @@
+[build-system]
+requires = [
+    "hatchling",
+    "build",
+    "twine"
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "iris-predictor"
+version = "0.1.0"
+dependencies = [
+  "scikit-learn",
+  "pandas",
+  "joblib",
+]
+requires-python = ">=3.11"
+authors = [
+  {name = "Peter Bednar"},
+]
+description = "Iris predictor"
+readme = "README.md"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "build",
+    "twine"
+]
+
+[project.urls]
+Homepage = "https://github.com/peterbednar/insa"
+Repository = "https://github.com/peterbednar/insa.git"
+"Bug Tracker" = "https://github.com/peterbednar/insa/issues"
