@@ -10,3 +10,8 @@ def load_pipeline(filename=None):
     if filename is None:
         filename = DEFAULT_PIPELINE_FILENAME
     return joblib.load(TRAINED_MODEL_DIR / filename)
+
+def pipeline_exists(filename=None):
+    if filename is None:
+        filename = DEFAULT_PIPELINE_FILENAME
+    return (TRAINED_MODEL_DIR / filename).is_file()

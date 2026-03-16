@@ -19,4 +19,7 @@ def test_mean_inputer():
 
     mean = df["x1"].mean()
     x1_nan_index = df[df["x1"].isna()].index
-    assert (tdf["x1"][x1_nan_index] == mean).all()
+    x1_nan_values = tdf["x1"][x1_nan_index].to_numpy()
+
+    assert np.all(np.equal(x1_nan_values, mean))
+    # assert np.all(np.isclose(x1_nan_values, mean))

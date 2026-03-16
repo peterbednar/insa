@@ -2,11 +2,12 @@ import pytest
 import numpy as np
 import pandas as pd
 from uui_iris_predictor.train_pipeline import run_training
-from uui_iris_predictor.data_manager import load_pipeline
+from uui_iris_predictor.data_manager import load_pipeline, pipeline_exists
 
 @pytest.fixture(scope="module", autouse=True)
 def setup_module():
-    run_training()
+    if not pipeline_exists():
+        run_training()
 
 def test_pipeline_score():
     pipe = load_pipeline()
