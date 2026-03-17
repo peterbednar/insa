@@ -9,7 +9,7 @@ def setup_module():
     if not pipeline_exists():
         run_training()
 
-def test_pipeline_score():
+def test_pipeline_predict():
     pipe = load_pipeline()
 
     X = pd.read_csv("tests/data/test1_input.csv")

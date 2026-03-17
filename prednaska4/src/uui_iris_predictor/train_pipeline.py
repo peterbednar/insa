@@ -11,7 +11,7 @@ from uui_iris_predictor.data_manager import save_pipeline
 def run_training():
 
     pipe = Pipeline(
-        [("imput-missing", MeanInputer(variables=["sepal length (cm)", "sepal width (cm)"])),
+        [("input_missing", MeanInputer(variables=["sepal length (cm)", "sepal width (cm)"])),
          ("scale", StandardScaler()),
          ("pca", PCA()),
          ("logistic", LogisticRegression())]

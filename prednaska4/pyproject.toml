@@ -1,18 +1,16 @@
 [build-system]
 requires = [
     "hatchling",
-    "build",
-    "twine"
 ]
 build-backend = "hatchling.build"
 
 [project]
 name = "uui-iris-predictor"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
-  "scikit-learn",
-  "pandas",
-  "joblib",
+  "scikit-learn==1.8.*",
+  "pandas>=3.0.0,<3.1.0",
+  "joblib>=1.5.0,<1.6.0",
 ]
 requires-python = ">=3.11"
 authors = [
