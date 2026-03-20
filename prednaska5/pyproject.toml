@@ -28,6 +28,7 @@ classifiers = [
 [project.optional-dependencies]
 dev = [
     "pytest",
+    "httpx",
     "build",
     "twine"
 ]

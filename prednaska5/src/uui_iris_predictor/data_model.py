@@ -1,6 +1,6 @@
-from uui_iris_predictor.config import PIPELINE_VERSION
-from typing import Literal, Dict, List
 from pydantic import BaseModel
+from typing import Literal, Dict, List
+from uui_iris_predictor.config import PIPELINE_VERSION
 
 class Record(BaseModel):
     sepal_length: float

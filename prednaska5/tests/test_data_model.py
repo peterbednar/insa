@@ -1,3 +1,6 @@
+import copy
+import pytest
+from pydantic import ValidationError
 from uui_iris_predictor.data_model import RpcRequest, RpcResponse
 
 TEST_REQUEST_1 = {
@@ -20,8 +23,29 @@ TEST_RESPONSE_1 = {
     "id": 1
 }
 
-def test_request():
+def test_request_1():
     RpcRequest(**TEST_REQUEST_1)
 
-def test_response():
+def test_request_2():
+    request = copy.deepcopy(TEST_REQUEST_1)
+    request["jsonrpc"] = "1.0"
+
+    with pytest.raises(ValidationError):
+        RpcRequest(**request)
+
+def test_request_3():
+    request = copy.deepcopy(TEST_REQUEST_1)
+    request["method"] = "unknown"
+
+    with pytest.raises(ValidationError):
+        RpcRequest(**request)
+
+def test_request_4():
+    request = copy.deepcopy(TEST_REQUEST_1)
+    del request["params"]
+
+    with pytest.raises(ValidationError):
+        RpcRequest(**request)
+
+def test_response_1():
     RpcResponse(**TEST_RESPONSE_1)
