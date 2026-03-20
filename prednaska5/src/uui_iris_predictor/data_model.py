@@ -1,5 +1,5 @@
 from uui_iris_predictor.config import PIPELINE_VERSION
-from typing import Literal
+from typing import Literal, Dict, List
 from pydantic import BaseModel
 
 class Record(BaseModel):
@@ -9,13 +9,16 @@ class Record(BaseModel):
     petal_width: float
 
 class Params(BaseModel):
-    data: list[Record]
+    data: List[Record]
     pipeline: str = PIPELINE_VERSION
 
+class Prediction(BaseModel):
+    label: str | int
+    proba: Dict[str | int, float] | None = None
+
 class Result(BaseModel):
-    y_pred: list[int] | None
-    y_proba: list[list[float]] | None
-    y_log_proba: list[list[float]] | None
+    predictions: List[Prediction]
+    pipeline: str
 
 class Error(BaseModel):
     code: int
@@ -24,7 +27,7 @@ class Error(BaseModel):
 
 class RpcRequest(BaseModel):
     jsonrpc: Literal["2.0"]
-    method: Literal["pipeline/predict"]
+    method: Literal["pipeline/predict", "pipeline/predict_proba"]
     params: Params
     id: int | None = None
 
