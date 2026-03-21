@@ -1,10 +1,10 @@
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from collections import defaultdict
 from uui_iris_predictor.data_manager import load_pipeline
 from uui_iris_predictor.version import __version__
 from uui_iris_predictor.config import PIPELINE_VERSION
-from uui_iris_predictor.data_model import RpcRequest, RpcResponse, RpcError, Result, Prediction
+from uui_iris_predictor.data_model import RpcRequest, RpcResponse, RpcError, Result, Prediction, Error
 
 app = FastAPI()
 
@@ -30,13 +30,22 @@ def predict(params):
     )
 
 @app.post("/api/v2/rpc")
-async def json_rpc(request: RpcRequest) -> RpcResponse | RpcError:
-    result = predict(request.params)
-    return RpcResponse(
-        jsonrpc="2.0",
-        result=result,
-        id=request.id
-    )
+async def json_rpc(request: Request) -> RpcResponse | RpcError:
+    rpc_request = None
+    try:
+        rpc_request = RpcRequest(** await request.json())
+        result = predict(rpc_request.params)
+        return RpcResponse(
+            jsonrpc="2.0",
+            result=result,
+            id=rpc_request.id
+        )
+    except Exception as e:
+        return RpcError(
+            jsonrpc="2.0",
+            error=Error(code=-32000, message=str(e)),
+            id=rpc_request.id if rpc_request is not None else None
+        )
 
 if __name__ == "__main__":
     import uvicorn

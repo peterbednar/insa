@@ -23,7 +23,7 @@ class Result(BaseModel):
 class Error(BaseModel):
     code: int
     message: str
-    data: dict
+    data: dict | None = None
 
 class RpcRequest(BaseModel):
     jsonrpc: Literal["2.0"]
