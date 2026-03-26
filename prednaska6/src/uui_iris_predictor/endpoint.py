@@ -79,7 +79,6 @@ async def json_rpc_with_metrics(request: RpcRequest) -> RpcResponse | RpcRequest
                         pipeline=result.pipeline,
                         label=label
                     ).observe(proba)
-
     else:
         rpc_requests_total.labels(
             method=request.method,
