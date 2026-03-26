@@ -37,3 +37,10 @@ twine upload --repository testpypi dist/*
 ```
 
 You will be prompted to provide your API token.
+
+## Build Docker image
+
+Build the Docker image:
+
+```
+docker build -t uui-iris-predictor .

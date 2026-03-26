@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 name = "uui-iris-predictor"
 dynamic = ["version"]
 dependencies = [
-  "scikit-learn==1.8.*",
+  "scikit-learn>=1.8.0,<2.0.0",
   "pandas>=3.0.0,<4.0.0",
   "joblib>=1.5.0,<2.0.0",
   "fastapi>=0.135.0,<1.0.0",
@@ -41,3 +41,6 @@ Repository = "https://github.com/peterbednar/insa.git"
 
 [tool.hatch.version]
 path = "src/uui_iris_predictor/version.py"
+
+[tool.hatch.build]
+artifacts = ["src/uui_iris_predictor/trained_models/*.pkl"]
