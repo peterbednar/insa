@@ -1,0 +1,20 @@
+import pytest
+import numpy as np
+import pandas as pd
+from uui_iris_predictor.train_pipeline import run_training
+from uui_iris_predictor.data_manager import load_pipeline, pipeline_exists
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_module():
+    if not pipeline_exists():
+        run_training()
+
+def test_pipeline_predict():
+    pipe = load_pipeline()
+
+    X = pd.read_csv("tests/data/test1_input.csv")
+    y = pd.read_csv("tests/data/test1_output.csv")
+
+    y_pred = pipe.predict(X)
+
+    assert np.array_equal(y["label"].to_numpy(), y_pred)

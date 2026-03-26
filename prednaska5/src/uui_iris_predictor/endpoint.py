@@ -20,8 +20,10 @@ def predict(params):
     X = pd.DataFrame.from_records([record.model_dump() for record in params.data])
 
     labels = pipe.predict(X)
+
+    model = pipe[-1]
     probs = pipe.predict_proba(X)
-    probs = [dict(zip(pipe.steps[-1][1].classes_, p)) for p in probs]
+    probs = [dict(zip(model.classes_, p)) for p in probs]
 
     predictions = [Prediction(label=label, proba=proba) for label, proba in zip(labels, probs)]
     return Result(
@@ -30,21 +32,19 @@ def predict(params):
     )
 
 @app.post("/api/v2/rpc")
-async def json_rpc(request: Request) -> RpcResponse | RpcError:
-    rpc_request = None
+async def json_rpc(request: RpcRequest) -> RpcResponse | RpcError:
     try:
-        rpc_request = RpcRequest(** await request.json())
-        result = predict(rpc_request.params)
+        result = predict(request.params)
         return RpcResponse(
             jsonrpc="2.0",
             result=result,
-            id=rpc_request.id
+            id=request.id
         )
     except Exception as e:
         return RpcError(
             jsonrpc="2.0",
             error=Error(code=-32000, message=str(e)),
-            id=rpc_request.id if rpc_request is not None else None
+            id=request.id
         )
 
 if __name__ == "__main__":

@@ -61,3 +61,10 @@ def test_rpc_call_2():
     response = client.post("/api/v2/rpc", json=TEST_REQUEST_2)
 
     assert response.status_code == 422
+
+def test_metrics():
+    client.post("/api/v2/rpc", json=TEST_REQUEST_1)
+    response = client.get("/metrics")
+
+    assert response.status_code == 200
+    assert len(response.text.splitlines()) == 128

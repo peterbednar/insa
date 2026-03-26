@@ -1,0 +1,1 @@
+from uui_iris_predictor.version import __version__
