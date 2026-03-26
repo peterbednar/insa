@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 name = "uui-iris-predictor"
 version = "0.1.1"
 dependencies = [
-  "scikit-learn==1.8.*",
+  "scikit-learn>=1.8.0,<2.0.0",
   "pandas>=3.0.0,<4.0.0",
   "joblib>=1.5.0,<2.0.0",
 ]
@@ -34,3 +34,6 @@ dev = [
 Homepage = "https://github.com/peterbednar/insa"
 Repository = "https://github.com/peterbednar/insa.git"
 "Bug Tracker" = "https://github.com/peterbednar/insa/issues"
+
+[tool.hatch.build]
+artifacts = ["src/uui_iris_predictor/trained_models/*.pkl"]
