@@ -22,5 +22,5 @@ prediction_distribution = Histogram(
     "prediction_distribution",
     "Distribution of predicted labels",
     ["pipeline", "label"],
-    buckets=[p / 100 for p in range(0, 100, 5)]
+    buckets=[p / 100 for p in range(0, 100, 10)]
 )
