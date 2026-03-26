@@ -50,7 +50,7 @@ async def json_rpc(request: RpcRequest) -> RpcResponse | RpcError:
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
-        "endpoint:app",
+        "src.uui_iris_predictor.endpoint:app",
         host="0.0.0.0",
         port=8000,
         reload=True # auto-reload for development
