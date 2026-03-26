@@ -67,4 +67,4 @@ def test_metrics():
     response = client.get("/metrics")
 
     assert response.status_code == 200
-    assert len(response.text.splitlines()) == 98
+    assert len(response.text.splitlines()) == 95
