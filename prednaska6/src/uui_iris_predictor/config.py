@@ -12,7 +12,10 @@ TRAINED_MODEL_DIR = Path(os.getenv("TRAINED_MODEL_DIR", PACKAGE_ROOT / "trained_
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 LOG_LEVEL = getattr(logging, LOG_LEVEL, logging.INFO)
 
-logging.basicConfig(level=LOG_LEVEL)
+logging.basicConfig(
+    level=LOG_LEVEL,
+    format="%(levelname)-10s%(message)s"
+)
 
 def get_logger():
     return logging.getLogger("uui_iris_predictor")
