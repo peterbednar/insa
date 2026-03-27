@@ -62,9 +62,19 @@ def test_rpc_call_2():
 
     assert response.status_code == 422
 
+def count_metrics_with_prefix(lines, prefix):
+    return len([l for l in lines if l.strip().startswith(prefix)])
+
 def test_metrics():
     client.post("/api/v2/rpc", json=TEST_REQUEST_1)
     response = client.get("/metrics")
 
     assert response.status_code == 200
-    assert len(response.text.splitlines()) == 95
+    lines = response.text.splitlines()
+
+    assert count_metrics_with_prefix(lines, "rpc_requests_total") == 1
+    assert count_metrics_with_prefix(lines, "rpc_requests_created") == 1
+    assert count_metrics_with_prefix(lines, "rpc_request_duration_seconds") == 18
+    assert count_metrics_with_prefix(lines, "predictions_total") == 1
+    assert count_metrics_with_prefix(lines, "predictions_created") == 1
+    assert count_metrics_with_prefix(lines, "prediction_distribution") == 39
