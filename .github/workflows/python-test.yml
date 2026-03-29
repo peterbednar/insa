@@ -3,6 +3,7 @@ name: Test Python Package
 on:
   push:
     paths: [prednaska6/**]
+  workflow_dispatch:
 
 permissions:
   contents: read
