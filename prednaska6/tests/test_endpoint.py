@@ -21,7 +21,7 @@ TEST_REQUEST_1 = {
 TEST_RESPONSE_1 = {
     "jsonrpc": "2.0",
     "result": {
-        "predictions": [{"label": 1, "proba": {"0":0.020317443545718548, "1":0.796773079482379,  "2": 0.1829094769719025}}],
+        "predictions": [{"label": 1, "proba": {'0': 0.020317443545718607, '1': 0.7967730794823793, '2': 0.18290947697190216}}],
         "pipeline": PIPELINE_VERSION
     },
     "id": 1
