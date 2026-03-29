@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
 #    environment:
-#      - PIPELINE_VERSION: "0.1.2"
+#      PIPELINE_VERSION: "0.1.2"
     restart: unless-stopped
 
   prometheus:
