@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  release-build:
+  pytest:
     runs-on: ubuntu-latest
     defaults:
       run:
