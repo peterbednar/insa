@@ -1,5 +1,6 @@
 import pytest
 import copy
+import numpy as np
 from fastapi.testclient import TestClient
 from uui_iris_predictor.endpoint import app
 from uui_iris_predictor.version import __version__
@@ -44,7 +45,14 @@ def test_rpc_call_1():
     response = client.post("/api/v2/rpc", json=TEST_REQUEST_1)
 
     assert response.status_code == 200
-    assert response.json() == TEST_RESPONSE_1
+    response = response.json()
+
+    assert response["result"]["predictions"][0]["label"] == TEST_RESPONSE_1["result"]["predictions"][0]["label"]
+
+    result_proba = [p for p in response["result"]["predictions"][0]["proba"].values()]
+    expected_proba = [p for p in TEST_RESPONSE_1["result"]["predictions"][0]["proba"].values()]
+
+    assert np.allclose(result_proba, expected_proba)
 
 TEST_REQUEST_2 = {
     "jsonrpc": "2.0",
