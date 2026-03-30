@@ -1,3 +1,5 @@
+[![Test Python Package](https://github.com/peterbednar/insa/actions/workflows/python-test.yml/badge.svg?event=push)](https://github.com/peterbednar/insa/actions/workflows/python-test.yml)
+
 # Iris Predictor
 
 A simple Python package for predicting iris species.
