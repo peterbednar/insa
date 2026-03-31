@@ -1,0 +1,4 @@
+# Update with VM IP address from Terraform
+
+[hosts]
+vm1 ansible_host=XXX.XXX.XXX.XXX

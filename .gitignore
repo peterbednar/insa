@@ -212,6 +212,6 @@ doc/
 *.pkl
 
 .terraform/
-.terraform.lock.hcl
+.terraform.lock.*
 *.tfstate
 *.tfstate.backup
