@@ -8,7 +8,8 @@ terraform {
 }
 
 provider "google" {
-  project = "project-99ae20df-3cbc-4d1d-9e1"
+  # Update with your project ID
+  project = "project-xxxxxxxx-xxxx-xxxx-xxx"
   region  = "europe-central2"
   zone    = "europe-central2-a"
 }
